@@ -76,12 +76,12 @@ export default function LandingSection() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-center gap-0">
             <img 
-              src="./IMG_7083 2-left.png" 
+              src="/PRO_web/IMG_7083 2-left.png" 
               alt="PRO App Phone Mockup" 
               className="w-full max-w-[400px] mx-auto rounded-lg"
             />
             <img 
-              src="./IMG_7083 2-portrait.png" 
+              src="/PRO_web/IMG_7083 2-portrait.png" 
               alt="PRO App Phone Mockup" 
               className="w-full max-w-[320px] mx-auto rounded-lg"
             />
