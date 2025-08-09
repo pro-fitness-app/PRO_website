@@ -142,7 +142,7 @@ export default function Home() {
           <section className="w-full py-8">
             <div className="w-full">
               <img 
-                src="pro-terminal-website/public/Frame 1-3.png" 
+                src="./Frame 1-3.png" 
                 alt="P.R.O. App Screenshots" 
                 className="w-full h-auto object-cover"
               />
