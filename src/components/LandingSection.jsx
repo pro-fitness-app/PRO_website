@@ -95,12 +95,12 @@ export default function LandingSection() {
             
             {/* Phone Mockups */}
             <img 
-              src="/PRO_web/IMG_7372-left.png" 
+              src="/IMG_7372-left.png" 
               alt="PRO App Phone Mockup" 
               className="w-full max-w-[400px] mx-auto rounded-lg relative z-10"
             />
             <img 
-              src="/PRO_web/IMG_7368-portrait.png" 
+              src="/IMG_7368-portrait.png" 
               alt="PRO App Phone Mockup" 
               className="w-full max-w-[320px] mx-auto rounded-lg relative z-10"
             />
