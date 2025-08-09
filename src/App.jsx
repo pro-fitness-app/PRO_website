@@ -1,9 +1,10 @@
 import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import Features from './pages/Features';
-import Media from './pages/Media';
+// import Media from './pages/Media';
 import FAQ from './pages/FAQ';
 import Analytics from './pages/Analytics';
+import BetaSignup from './pages/BetaSignup';
 
 function TerminalNav() {
   return (
@@ -14,11 +15,13 @@ function TerminalNav() {
         <span>/</span>
         <NavLink to="/features" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>features</NavLink>
         <span>/</span>
-        <NavLink to="/media" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>media</NavLink>
-        <span>/</span>
+        {/* <NavLink to="/media" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>media</NavLink>
+        <span>/</span> */}
         <NavLink to="/analytics" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>analytics</NavLink>
         <span>/</span>
         <NavLink to="/faq" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>faq</NavLink>
+        <span>/</span>
+        <NavLink to="/beta" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>beta</NavLink>
       </div>
     </nav>
   );
@@ -39,9 +42,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/features" element={<Features />} />
-            <Route path="/media" element={<Media />} />
+            {/* <Route path="/media" element={<Media />} /> */}
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/beta" element={<BetaSignup />} />
           </Routes>
         </main>
         <footer className="mt-8 text-pink-900 text-center text-xs opacity-80 w-full">
