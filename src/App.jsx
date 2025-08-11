@@ -5,6 +5,7 @@ import Features from './pages/Features';
 import FAQ from './pages/FAQ';
 import Analytics from './pages/Analytics';
 import BetaSignup from './pages/BetaSignup';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function TerminalNav() {
   return (
@@ -20,6 +21,8 @@ function TerminalNav() {
         <NavLink to="/analytics" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>analytics</NavLink>
         <span>/</span>
         <NavLink to="/faq" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>faq</NavLink>
+        <span>/</span>
+        <NavLink to="/privacy" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>privacy</NavLink>
         <span>/</span>
         <NavLink to="/beta" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>beta</NavLink>
       </div>
@@ -45,16 +48,17 @@ export default function App() {
             {/* <Route path="/media" element={<Media />} /> */}
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/beta" element={<BetaSignup />} />
           </Routes>
         </main>
         <footer className="mt-8 text-pink-900 text-center text-xs opacity-80 w-full">
-          <div className="flex justify-center space-x-4 mb-2">
+          {/* <div className="flex justify-center space-x-4 mb-2">
             <span className="font-mono">/./_ Follow us: </span>
             <a href="#" className="hover:underline">@proapp</a>
             <a href="#" className="hover:underline">Instagram</a>
             <a href="#" className="hover:underline">Twitter</a>
-          </div>
+          </div> */}
           <div>&copy; {new Date().getFullYear()} PRO App. All rights reserved.</div>
         </footer>
       </div>
