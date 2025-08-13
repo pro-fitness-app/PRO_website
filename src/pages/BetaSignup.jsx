@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const asciiLogo = `
 ██████╗ ██████╗  ██████╗ 
@@ -33,24 +35,40 @@ export default function BetaSignup() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        sport: '',
-        experience: '',
-        device: '',
-        feedback: ''
-      });
-    }, 3000);
+    try {
+      // Добавляем timestamp к данным
+      const formDataWithTimestamp = {
+        ...formData,
+        timestamp: serverTimestamp(),
+        submittedAt: new Date().toISOString()
+      };
+      
+      // Сохраняем в Firebase
+      const docRef = await addDoc(collection(db, 'beta-signups'), formDataWithTimestamp);
+      
+      console.log('Document written with ID: ', docRef.id);
+      
+      setIsSubmitted(true);
+      
+      // Сброс формы через 3 секунды
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          sport: '',
+          experience: '',
+          device: '',
+          feedback: ''
+        });
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -200,6 +218,10 @@ export default function BetaSignup() {
             >
               <option value="">Select your device</option>
               <optgroup label="iPhone">
+                <option value="iphone-16-pro-max">iPhone 16 Pro Max</option>
+                <option value="iphone-16-pro">iPhone 16 Pro</option>
+                <option value="iphone-16-plus">iPhone 16 Plus</option>
+                <option value="iphone-16">iPhone 16</option>
                 <option value="iphone-15-pro-max">iPhone 15 Pro Max</option>
                 <option value="iphone-15-pro">iPhone 15 Pro</option>
                 <option value="iphone-15-plus">iPhone 15 Plus</option>
@@ -297,27 +319,7 @@ export default function BetaSignup() {
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="mt-12 text-center">
-        <div className="grid md:grid-cols-4 gap-6">
-          <div className="bg-pink-100 border-2 border-pink-400 rounded-lg p-4">
-            <div className="text-3xl font-bold text-pink-900">500+</div>
-            <div className="text-pink-800">Beta Testers</div>
-          </div>
-          <div className="bg-pink-100 border-2 border-pink-400 rounded-lg p-4">
-            <div className="text-3xl font-bold text-pink-900">15+</div>
-            <div className="text-pink-800">Sports Supported</div>
-          </div>
-          <div className="bg-pink-100 border-2 border-pink-400 rounded-lg p-4">
-            <div className="text-3xl font-bold text-pink-900">24/7</div>
-            <div className="text-pink-800">Support Available</div>
-          </div>
-          <div className="bg-pink-100 border-2 border-pink-400 rounded-lg p-4">
-            <div className="text-3xl font-bold text-pink-900">100%</div>
-            <div className="text-pink-800">Free Beta Access</div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 }
