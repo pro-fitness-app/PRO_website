@@ -94,13 +94,13 @@ export default function BetaSignup() {
     <div className="w-full max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <pre className="text-4xl md:text-6xl leading-none text-pink-100 select-none font-mono mb-6" style={{fontFamily: 'monospace'}}>
+        <pre className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-none text-pink-100 select-none font-mono mb-6" style={{fontFamily: 'monospace'}}>
           {asciiLogo}
         </pre>
-        <h1 className="text-4xl md:text-6xl font-bold text-pink-100 mb-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-pink-100 mb-6">
           Join the Beta Revolution
         </h1>
-        <p className="text-xl text-pink-200 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-pink-200 max-w-3xl mx-auto leading-relaxed">
           Be among the first to experience the future of sports analytics. 
           Get exclusive early access to PRO's cutting-edge features and help shape the future of athletic performance tracking.
         </p>
