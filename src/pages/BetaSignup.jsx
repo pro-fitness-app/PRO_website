@@ -94,9 +94,11 @@ export default function BetaSignup() {
     <div className="w-full max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <pre className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-none text-pink-100 select-none font-mono mb-6" style={{fontFamily: 'monospace'}}>
-          {asciiLogo}
-        </pre>
+        <div className="flex-shrink-0 overflow-hidden w-full">
+          <pre className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-none text-pink-100 select-none font-mono mb-6 w-full break-words" style={{fontFamily: 'monospace'}}>
+            {asciiLogo}
+          </pre>
+        </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-pink-100 mb-6">
           Join the Beta Revolution
         </h1>
