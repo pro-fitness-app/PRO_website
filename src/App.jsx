@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Features from './pages/Features';
 // import Media from './pages/Media';
 import FAQ from './pages/FAQ';
-import Analytics from './pages/Analytics';
+// import Analytics from './pages/Analytics';
 import BetaSignup from './pages/BetaSignup';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
@@ -18,8 +18,8 @@ function TerminalNav() {
         <span>/</span>
         {/* <NavLink to="/media" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>media</NavLink>
         <span>/</span> */}
-        <NavLink to="/analytics" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>analytics</NavLink>
-        <span>/</span>
+        {/* <NavLink to="/analytics" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>analytics</NavLink>
+        <span>/</span> */}
         <NavLink to="/faq" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>faq</NavLink>
         <span>/</span>
         <NavLink to="/privacy" className={({ isActive }) => isActive ? 'underline font-bold' : ''}>privacy</NavLink>
@@ -46,7 +46,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/features" element={<Features />} />
             {/* <Route path="/media" element={<Media />} /> */}
-            <Route path="/analytics" element={<Analytics />} />
+            {/* <Route path="/analytics" element={<Analytics />} /> */}
             <Route path="/faq" element={<FAQ />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/beta" element={<BetaSignup />} />

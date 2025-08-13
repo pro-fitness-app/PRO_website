@@ -19,11 +19,11 @@ export default function LandingSection() {
 
   return (
     <>
-      <section className="w-full mt-12 flex items-center justify-center px-4 py-0">
-        <div className="flex flex-col lg:flex-row items-center justify-center  gap-12 lg:gap-16 max-w-7xl mx-auto">
+      <section className="w-full mt-8 sm:mt-12 flex items-center justify-center px-4 py-0">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 lg:gap-16 max-w-7xl mx-auto">
           {/* ASCII Logo - Left Side */}
           <div className="flex-shrink-0">
-            <pre className="text-4xl md:text-8xl lg:text-5xl leading-none text-pink-100 select-none font-mono" style={{fontFamily: 'monospace'}}>
+            <pre className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none text-pink-100 select-none font-mono" style={{fontFamily: 'monospace'}}>
               {asciiLogo}
             </pre>
           </div>
@@ -31,15 +31,15 @@ export default function LandingSection() {
           {/* Content - Right Side */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl">
             {/* App Description */}
-            <div className="mb-12">
-              <h1 className="text-3xl md:text-5xl font-bold text-pink-100 mb-6">
-                Your Ultimate Sport Statistics App
-              </h1>
-              <p className="text-lg md:text-xl text-pink-200 leading-relaxed">
-                Track your performance, analyze your progress, and dominate your sport with PRO. 
-                Get real-time statistics, personalized insights, and professional-grade analytics 
-                to take your game to the next level.
-              </p>
+            <div className="mb-8 sm:mb-12">
+                          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-pink-100 mb-6">
+              Your Ultimate Sport Statistics App
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-pink-200 leading-relaxed">
+              Track your performance, analyze your progress, and dominate your sport with PRO. 
+              Get real-time statistics, personalized insights, and professional-grade analytics 
+              to take your game to the next level.
+            </p>
             </div>
             
             {/* Call to Action Buttons */}
