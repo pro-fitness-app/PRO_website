@@ -1,322 +1,313 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import FrameStyleFeatures from '../components/FrameStyleFeatures';
 
 const featureCategories = [
   {
     id: 'dashboard',
-    title: '🏠 Smart Dashboard',
-    command: 'cat dashboard-features.txt',
+    title: 'Smart Dashboard',
+    description: 'Intelligent overview of your fitness journey with real-time insights and personalized metrics',
     features: [
-      { icon: '⭕', title: 'Health Rings Visualization', desc: 'Apple Watch-style activity rings for steps, calories, and floors' },
-      { icon: '📊', title: 'Real-time Activity Tracking', desc: 'Live updates of daily progress with instant feedback' },
-      { icon: '🎛️', title: 'Personalized Widgets', desc: 'Customizable dashboard with your most important metrics' },
-      { icon: '⚡', title: 'Quick Stats Overview', desc: 'Distance, duration, calories, and heart rate at a glance' }
+      { title: 'Health Rings Visualization', desc: 'Apple Watch-style activity rings for steps, calories, and floors climbed. Track your daily progress with beautiful, intuitive visualizations that motivate you to close all three rings every day.' },
+      { title: 'Real-time Activity Tracking', desc: 'Live updates of your daily progress with instant feedback. See your stats update in real-time as you move, providing immediate motivation and awareness of your activity levels.' },
+      { title: 'Personalized Widgets', desc: 'Customizable dashboard with your most important metrics. Arrange and prioritize the information that matters most to you, creating a personalized fitness command center.' },
+      { title: 'Quick Stats Overview', desc: 'Distance, duration, calories, and heart rate at a glance. Get instant access to your key performance indicators without navigating through multiple screens.' }
     ]
   },
   {
     id: 'ai',
-    title: '🤖 AI-Powered Features',
-    command: 'cat ai-features.txt',
+    title: 'AI-Powered Features',
+    description: 'Intelligent coaching and personalized insights that adapt to your unique fitness journey',
     features: [
-      { icon: '👨‍🏫', title: 'Coach Assistant', desc: 'AI-powered fitness coaching and advice' },
-      { icon: '🎯', title: 'Smart Goal Suggestions', desc: 'Personalized goal recommendations' },
-      { icon: '🔮', title: 'Performance Predictions', desc: 'AI insights into your fitness potential' },
-      { icon: '💡', title: 'Personalized Recommendations', desc: 'Custom training suggestions' }
+      { title: 'Coach Assistant', desc: 'AI-powered fitness coaching and advice that learns from your patterns. Receive personalized recommendations based on your goals, current fitness level, and historical performance data.' },
+      { title: 'Smart Goal Suggestions', desc: 'Personalized goal recommendations that challenge you appropriately. Our AI analyzes your capabilities and suggests realistic yet motivating targets to keep you progressing.' },
+      { title: 'Performance Predictions', desc: 'AI insights into your fitness potential and future achievements. Understand what\'s possible with consistent training and get predictions for upcoming milestones.' },
+      { title: 'Personalized Recommendations', desc: 'Custom training suggestions tailored to your preferences and schedule. Receive workout plans that fit your lifestyle and help you achieve your specific goals.' }
     ]
   },
   {
     id: 'analytics',
-    title: '📊 Advanced Analytics',
-    command: 'cat analytics-features.txt',
+    title: 'Advanced Analytics',
+    description: 'Deep insights into your performance with comprehensive data analysis and trend identification',
     features: [
-      { icon: '📋', title: 'Monthly Summary Reports', desc: 'Comprehensive monthly performance reviews' },
-      { icon: '🥧', title: 'Sport Distribution Analysis', desc: 'Visual breakdown of your workout types' },
-      { icon: '📈', title: 'Performance Trends', desc: 'Track improvements over time with detailed charts' },
-      { icon: '❤️', title: 'Heart Rate Zone Analysis', desc: 'Detailed cardiovascular fitness insights' },
-      { icon: '👣', title: 'Steps Analysis', desc: 'Advanced step counting and analysis' },
-      { icon: '😴', title: 'Sleep Analytics', desc: 'Track sleep patterns and recovery' }
+      { title: 'Monthly Summary Reports', desc: 'Comprehensive monthly performance reviews with detailed breakdowns. Track your progress over time with professional-grade reports that highlight achievements and areas for improvement.' },
+      { title: 'Sport Distribution Analysis', desc: 'Visual breakdown of your workout types and training balance. Ensure you\'re maintaining a well-rounded fitness routine across different activities and disciplines.' },
+      { title: 'Performance Trends', desc: 'Track improvements over time with detailed charts and analytics. Visualize your progress with trend lines, seasonal patterns, and long-term growth trajectories.' },
+      { title: 'Heart Rate Zone Analysis', desc: 'Detailed cardiovascular fitness insights and training zone optimization. Understand your heart rate patterns and optimize your training intensity for maximum effectiveness.' },
+      { title: 'Steps Analysis', desc: 'Advanced step counting and analysis with goal setting and progress tracking. Set daily, weekly, and monthly step targets with detailed breakdowns of your walking patterns.' },
+      { title: 'Sleep Analytics', desc: 'Track sleep patterns and recovery metrics for optimal performance. Monitor your sleep quality, duration, and consistency to ensure proper recovery between workouts.' }
     ]
   },
   {
     id: 'workouts',
-    title: '🏃‍♂️ Comprehensive Workout Tracking',
-    command: 'cat workout-features.txt',
+    title: 'Comprehensive Workout Tracking',
+    description: 'Track every aspect of your training with professional-grade monitoring and analysis',
     features: [
-      { icon: '🏃‍♀️', title: 'Multi-Sport Support', desc: 'Running, cycling, swimming, walking, hiking, and more' },
-      { icon: '🗺️', title: 'GPS Route Mapping', desc: 'Real-time route tracking with beautiful map visualization' },
-      { icon: '📈', title: 'Advanced Metrics', desc: 'Speed, pace, cadence, heart rate zones, elevation, and power' },
-      { icon: '📚', title: 'Workout History', desc: 'Complete workout library with filtering and search' },
-      { icon: '🔄', title: 'Import Integration', desc: 'Seamless import from Apple Health and other fitness apps' }
+      { title: 'Multi-Sport Support', desc: 'Running, cycling, swimming, walking, hiking, and 50+ other activities. Whether you\'re a runner, cyclist, swimmer, or multi-sport athlete, P.R.O. has you covered with specialized tracking for each discipline.' },
+      { title: 'GPS Route Mapping', desc: 'Real-time route tracking with beautiful map visualization and elevation data. See exactly where you\'ve been with detailed maps that include terrain, elevation changes, and route statistics.' },
+      { title: 'Advanced Metrics', desc: 'Speed, pace, cadence, heart rate zones, elevation, and power analysis. Go beyond basic tracking with professional-grade metrics that serious athletes need to optimize their performance.' },
+      { title: 'Workout History', desc: 'Complete workout library with filtering, search, and detailed analysis. Access your entire training history with powerful search and filtering tools to analyze specific time periods or workout types.' },
+      { title: 'Import Integration', desc: 'Seamless import from Apple Health and other fitness apps and devices. Consolidate all your fitness data in one place with automatic synchronization from your existing devices and apps.' }
     ]
   },
   {
     id: 'goals',
-    title: '🎯 Goal Setting & Achievement',
-    command: 'cat goal-features.txt',
+    title: 'Goal Setting & Achievement',
+    description: 'Set, track, and celebrate your milestones with intelligent goal management',
     features: [
-      { icon: '🤖', title: 'Smart Goal Creation', desc: 'AI-powered goal suggestions based on your fitness level' },
-      { icon: '📊', title: 'Progress Tracking', desc: 'Visual progress indicators for all your goals' },
-      { icon: '🎯', title: 'Sport-Specific Goals', desc: 'Customized goals for different activities' },
-      { icon: '🏆', title: 'Achievement System', desc: 'Bronze, Silver, Gold, Platinum, and Diamond levels' },
-      { icon: '🎉', title: 'Milestone Celebrations', desc: 'Special rewards for reaching important milestones' }
+      { title: 'Smart Goal Creation', desc: 'AI-powered goal suggestions based on your current fitness level and historical performance. Receive realistic yet challenging targets that are tailored to your capabilities and aspirations.' },
+      { title: 'Progress Tracking', desc: 'Visual progress indicators for all your goals with detailed breakdowns. See exactly how close you are to achieving each milestone with intuitive progress bars and percentage indicators.' },
+      { title: 'Sport-Specific Goals', desc: 'Customized goals for different activities and training disciplines. Set separate targets for running, cycling, strength training, and other activities with sport-specific metrics and tracking.' },
+      { title: 'Achievement System', desc: 'Bronze, Silver, Gold, Platinum, and Diamond levels with unlockable rewards. Progress through achievement tiers as you reach new milestones, with special rewards and recognition for each level.' },
+      { title: 'Milestone Celebrations', desc: 'Special rewards and celebrations for reaching important milestones. Get recognized for your achievements with animated celebrations, badges, and social sharing options.' }
     ]
   },
   {
     id: 'records',
-    title: '🏆 Records & Achievements',
-    command: 'cat records-features.txt',
+    title: 'Records & Achievements',
+    description: 'Track and celebrate your personal bests across all dimensions of performance',
     features: [
-      { icon: '🥇', title: 'Personal Records Tracking', desc: 'All-time, yearly, monthly, and weekly records' },
-      { icon: '📊', title: 'Multi-Dimensional Records', desc: 'Distance, duration, speed, heart rate, pace, calories, cadence, power, elevation' },
-      { icon: '🔔', title: 'Real-time Record Detection', desc: 'Instant notifications when you break records' },
-      { icon: '✨', title: 'Beautiful Record Celebrations', desc: 'Animated notifications for new achievements' },
-      { icon: '📜', title: 'Record History', desc: 'Complete history of all your personal bests' }
+      { title: 'Personal Records Tracking', desc: 'All-time, yearly, monthly, and weekly records with detailed breakdowns. Keep track of your best performances across different time periods and training cycles.' },
+      { title: 'Multi-Dimensional Records', desc: 'Distance, duration, speed, heart rate, pace, calories, cadence, power, and elevation records. Track your personal bests across every measurable aspect of your performance.' },
+      { title: 'Real-time Record Detection', desc: 'Instant notifications when you break records with celebration animations. Get immediate recognition for new achievements with real-time alerts and visual celebrations.' },
+      { title: 'Beautiful Record Celebrations', desc: 'Animated notifications and visual celebrations for new achievements. Make breaking records feel special with engaging animations and visual feedback.' },
+      { title: 'Record History', desc: 'Complete history of all your personal bests with detailed context and analysis. Review your record progression over time and understand the factors that contributed to each achievement.' }
     ]
   },
   {
     id: 'streaks',
-    title: '🔥 Streak Tracking System',
-    command: 'cat streak-features.txt',
+    title: 'Streak Tracking System',
+    description: 'Stay motivated with daily consistency tracking and milestone rewards',
     features: [
-      { icon: '🔥', title: 'Daily Streak Counter', desc: 'Track consecutive workout days with visual indicators' },
-      { icon: '🎁', title: 'Milestone Rewards', desc: 'Special bonuses for 7, 14, 30, 60, 100, and 365-day streaks' },
-      { icon: '⭕', title: 'Visual Progress', desc: 'Circular progress indicators and 7-day calendar' },
-      { icon: '💪', title: 'Motivational Messages', desc: 'Dynamic encouragement based on streak status' },
-      { icon: '☁️', title: 'Sync', desc: 'Streak data syncs across all your devices' }
+      { title: 'Daily Streak Counter', desc: 'Track consecutive workout days with visual indicators and progress tracking. Build momentum with daily consistency and see your streak grow with each workout.' },
+      { title: 'Milestone Rewards', desc: 'Special bonuses and recognition for 7, 14, 30, 60, 100, and 365-day streaks. Celebrate consistency milestones with special rewards, badges, and social recognition.' },
+      { title: 'Visual Progress', desc: 'Circular progress indicators and 7-day calendar with streak visualization. See your consistency patterns with intuitive visual representations that make tracking easy and motivating.' },
+      { title: 'Motivational Messages', desc: 'Dynamic encouragement and motivation based on your current streak status. Receive personalized messages that help you maintain momentum and push through challenging days.' },
+      { title: 'Cross-Device Sync', desc: 'Streak data syncs across all your devices for consistent tracking. Never lose your streak progress when switching between devices or platforms.' }
     ]
   },
   {
     id: 'gamification',
-    title: '🎮 Gamification & Motivation',
-    command: 'cat gamification-features.txt',
+    title: 'Gamification & Motivation',
+    description: 'Make fitness fun and engaging with game-like elements and social features',
     features: [
-      { icon: '⭐', title: 'Bonus System', desc: 'Earn points and level up through achievements' },
-      { icon: '🎲', title: 'Mini-Games', desc: 'Fun fitness games to stay motivated' },
-      { icon: '🏅', title: 'Achievement Badges', desc: 'Collect badges for various accomplishments' },
-      { icon: '📊', title: 'Point System', desc: 'Comprehensive scoring system with multipliers' },
-      { icon: '👥', title: 'Social Features', desc: 'Share achievements and compete with friends' }
+      { title: 'Bonus System', desc: 'Earn points and level up through achievements and consistent performance. Build your fitness profile with a comprehensive scoring system that rewards both effort and results.' },
+      { title: 'Mini-Games', desc: 'Fun fitness challenges and games to stay motivated and engaged. Break up your routine with entertaining challenges that make working out feel like play.' },
+      { title: 'Achievement Badges', desc: 'Collect badges for various accomplishments and milestones. Build your collection of achievements with unique badges that represent your fitness journey.' },
+      { title: 'Point System', desc: 'Comprehensive scoring system with multipliers and bonus opportunities. Earn points for workouts, streaks, records, and special challenges with a sophisticated scoring algorithm.' },
+      { title: 'Social Features', desc: 'Share achievements and compete with friends in friendly fitness challenges. Connect with other athletes and build a supportive community around your fitness goals.' }
     ]
   },
-  
   {
     id: 'location',
-    title: '🗺️ Location & Route Features',
-    command: 'cat location-features.txt',
+    title: 'Location & Route Features',
+    description: 'Explore and track your adventures with advanced mapping and location services',
     features: [
-      { icon: '🗺️', title: 'Interactive Maps', desc: 'Beautiful route visualization with elevation data' },
-      // { icon: '📚', title: 'Route History', desc: 'Save and revisit your favorite routes' },
-      { icon: '📍', title: 'Location Tracking', desc: 'Track where you\'ve been active' },
-      { icon: '📤', title: 'Route Sharing', desc: 'Share your routes with the community' }
-      // { icon: '🛍️', title: 'Route Shop', desc: 'Discover new routes from other users' }
+      { title: 'Interactive Maps', desc: 'Beautiful route visualization with elevation data and terrain information. See your workouts come to life with detailed maps that include elevation profiles, terrain types, and route statistics.' },
+      { title: 'Location Tracking', desc: 'Track where you\'ve been active with detailed location history and analysis. Understand your training patterns and discover new routes with comprehensive location tracking.' },
+      { title: 'Route Sharing', desc: 'Share your favorite routes with the community and discover new paths from other athletes. Build a network of recommended routes and share your discoveries with fellow fitness enthusiasts.' }
     ]
   },
-  
-  // {
-  //   id: 'ux',
-  //   title: '📱 User Experience',
-  //   command: 'cat ux-features.txt',
-  //   features: [
-  //     { icon: '🎨', title: 'Modern UI/UX', desc: 'Beautiful, intuitive interface with smooth animations' },
-  //     { icon: '🌙', title: 'Dark/Light Mode', desc: 'Customizable themes to match your preference' },
-  //     { icon: '🎨', title: 'Customizable Colors', desc: 'Personalize your app\'s appearance' },
-  //     { icon: '📱', title: 'Side Menu Navigation', desc: 'Easy access to all features' },
-  //     { icon: '📱', title: 'Bottom Tab Bar', desc: 'Quick access to main features' },
-  //     { icon: '🚀', title: 'Onboarding Experience', desc: 'Guided setup for new users' }
-  //   ]
-  // },
   {
     id: 'security',
-    title: '🔐 Data & Privacy',
-    command: 'cat security-features.txt',
+    title: 'Data & Privacy',
+    description: 'Your data is safe and secure with enterprise-grade protection and privacy controls',
     features: [
-      // { icon: '☁️', title: 'Firebase Integration', desc: 'Secure cloud storage and synchronization' },
-      { icon: '🍎', title: 'HealthKit Integration', desc: 'Seamless integration with Apple Health' },
-      { icon: '🔑', title: 'User Authentication', desc: 'Secure login and account management' },
-      { icon: '💾', title: 'Data Backup', desc: 'Automatic backup of all your fitness data' },
-      { icon: '🛡️', title: 'Privacy Protection', desc: 'Your data stays private and secure' }
+      { title: 'HealthKit Integration', desc: 'Seamless integration with Apple Health for comprehensive data consolidation. Connect all your health and fitness data in one secure, private ecosystem.' },
+      { title: 'User Authentication', desc: 'Secure login and account management with multi-factor authentication options. Protect your account with industry-standard security measures and optional enhanced authentication.' },
+      { title: 'Data Backup', desc: 'Automatic backup of all your fitness data with cloud synchronization. Never lose your training history with automatic backups and cross-device synchronization.' },
+      { title: 'Privacy Protection', desc: 'Your data stays private and secure with end-to-end encryption and strict privacy controls. Maintain complete control over your personal information with transparent privacy policies and user controls.' }
     ]
   }
-  // {
-  //   id: 'notifications',
-  //   title: '🔔 Smart Notifications',
-  //   command: 'cat notification-features.txt',
-  //   features: [
-  //     { icon: '🎉', title: 'Record Celebrations', desc: 'Beautiful notifications for new achievements' },
-  //     { icon: '🔥', title: 'Streak Reminders', desc: 'Motivational reminders to maintain your streak' },
-  //     { icon: '📊', title: 'Goal Progress Updates', desc: 'Regular updates on your goal progress' },
-  //     { icon: '📋', title: 'Monthly Summary Alerts', desc: 'End-of-month performance reviews' },
-  //     { icon: '⏰', title: 'Workout Reminders', desc: 'Smart scheduling suggestions' }
-  //   ]
-  // },
-  // {
-  //   id: 'customization',
-  //   title: '⚙️ Customization & Settings',
-  //   command: 'cat customization-features.txt',
-  //   features: [
-  //     { icon: '👤', title: 'Profile Management', desc: 'Complete user profile with photo, stats, and preferences' },
-  //     { icon: '🔔', title: 'Notification Preferences', desc: 'Customize what and when you receive notifications' },
-  //     { icon: '📤', title: 'Data Import/Export', desc: 'Easy data management and backup' },
-  //     { icon: '🎨', title: 'App Preferences', desc: 'Customize colors, themes, and display options' },
-  //     { icon: '🔐', title: 'Health Permissions', desc: 'Granular control over health data access' }
-  //   ]
-  // },
-  // {
-  //   id: 'performance',
-  //   title: '📈 Performance Features',
-  //   command: 'cat performance-features.txt',
-  //   features: [
-  //     { icon: '⚡', title: 'Lightning-Fast Processing', desc: 'Optimized for speed and efficiency' },
-  //     { icon: '📱', title: 'Offline Functionality', desc: 'Works without internet connection' },
-  //     { icon: '🔄', title: 'Background Sync', desc: 'Automatic data synchronization' },
-  //     { icon: '🔋', title: 'Battery Optimization', desc: 'Efficient power usage' },
-  //     { icon: '💾', title: 'Memory Management', desc: 'Optimized for smooth performance' }
-  //   ]
-  // }
 ];
 
-function TerminalSection({ command, children, isExpanded, onToggle }) {
-  return (
-    <div className="bg-pink-200 rounded-lg shadow-lg p-4 my-4 w-full max-w-6xl mx-auto border border-pink-400 transition-all duration-300 hover:shadow-xl">
-      <div 
-        className="flex items-center text-pink-900 font-bold text-lg mb-2 cursor-pointer hover:text-pink-700 transition-colors"
-        onClick={onToggle}
-      >
-        <span className="mr-2 text-pink-600">$</span>
-        <span className="font-mono">{command}</span>
-        <span className="ml-auto text-pink-600 transition-transform duration-300">
-          {isExpanded ? '▼' : '▶'}
-        </span>
-      </div>
-      <div className={`pl-6 text-pink-950 font-mono overflow-hidden transition-all duration-300 ${
-        isExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-      }`}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
 function FeatureCard({ feature, index }) {
-  const [isHovered, setIsHovered] = useState(false);
-  
   return (
     <div 
-      key={feature.title}
-      className={`feature-card flex items-start space-x-3 p-3 border border-pink-300 rounded-lg transition-all duration-300 hover:bg-pink-100 hover:border-pink-500 hover:shadow-md transform hover:scale-105 ${
-        isHovered ? 'bg-pink-100' : 'bg-pink-50'
-      }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="group bg-white rounded-2xl p-8 border border-gray-200 hover:border-pink-200 transition-all duration-300 hover:shadow-medium hover:-translate-y-1"
       style={{
-        animationDelay: `${index * 100}ms`
+        animationDelay: `${index * 50}ms`,
+        animation: 'slideUp 0.6s ease-out forwards'
       }}
     >
-      <span className="text-2xl transition-transform duration-300 hover:scale-110">{feature.icon}</span>
-      <div className="flex-1">
-        <div className="font-bold text-pink-900 transition-colors duration-300">{feature.title}</div>
-        <div className="text-pink-800 text-sm leading-relaxed">{feature.desc}</div>
+      <div className="mb-6">
+        <h3 className="font-bold text-gray-900 text-xl group-hover:text-pink-700 transition-colors duration-300 mb-3">
+          {feature.title}
+        </h3>
+        <div className="w-12 h-1 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full group-hover:from-pink-500 group-hover:to-pink-600 transition-all duration-300"></div>
       </div>
+      <p className="text-gray-600 leading-relaxed text-base">{feature.desc}</p>
     </div>
   );
 }
 
 export default function Features() {
-  const [expandedSections, setExpandedSections] = useState(new Set(['dashboard', 'workouts', 'goals']));
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const toggleSection = (sectionId) => {
-    const newExpanded = new Set(expandedSections);
-    if (newExpanded.has(sectionId)) {
-      newExpanded.delete(sectionId);
-    } else {
-      newExpanded.add(sectionId);
-    }
-    setExpandedSections(newExpanded);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="w-full max-w-6xl mx-auto text-center">
-        <div className="bg-pink-200 rounded-lg shadow-lg p-8 border border-pink-400">
-          <div className="text-pink-900 font-mono text-lg">
-            <span className="mr-2 text-pink-600">$</span>
-            Loading P.R.O. features...
-          </div>
-          <div className="mt-4 text-pink-700 animate-pulse">
-            <span className="inline-block animate-bounce">⠋</span>
-            <span className="inline-block animate-bounce" style={{animationDelay: '0.1s'}}>⠙</span>
-            <span className="inline-block animate-bounce" style={{animationDelay: '0.2s'}}>⠹</span>
-            <span className="inline-block animate-bounce" style={{animationDelay: '0.3s'}}>⠸</span>
-            <span className="inline-block animate-bounce" style={{animationDelay: '0.4s'}}>⠼</span>
-          </div>
-          <div className="mt-4 text-pink-800 text-sm">
-            Discovering {featureCategories.reduce((sum, cat) => sum + cat.features.length, 0)} amazing features...
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const totalFeatures = featureCategories.reduce((sum, cat) => sum + cat.features.length, 0);
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4">
-      {/* Header Section */}
-      <div className="bg-pink-200 rounded-lg shadow-lg p-6 mb-6 border border-pink-400">
-        <div className="text-pink-900 font-bold text-xl mb-2">
-          <span className="mr-2 text-pink-600">$</span>
-          <span className="font-mono">cat P.R.O.-features-overview.txt</span>
-        </div>
-        <div className="pl-6 text-pink-950 font-mono">
-          <div className="text-lg font-bold mb-4">🏃‍♀️ P.R.O. - Premium Fitness Tracking App</div>
-          <div className="text-sm leading-relaxed mb-4">
-            Discover the ultimate fitness tracking experience with cutting-edge technology and motivational features. 
-            Whether you're a beginner or an elite athlete, P.R.O. provides all the tools you need to achieve your fitness goals.
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center px-4 py-2 bg-pink-50 text-pink-700 text-sm font-medium rounded-full mb-6">
+            <span className="w-2 h-2 bg-pink-500 rounded-full mr-2"></span>
+            Complete Feature Overview
           </div>
-          <div className="text-xs text-pink-700">
-            Total features: {featureCategories.reduce((sum, cat) => sum + cat.features.length, 0)} | 
-            Categories: {featureCategories.length} | 
-            Last updated: {new Date().toLocaleDateString()}
-          </div>
+          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6">
+            Discover All {totalFeatures}+
+            <span className="block bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent">
+              P.R.O. Features
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            From AI-powered coaching to comprehensive analytics, P.R.O. provides everything you need 
+            to track, analyze, and elevate your fitness performance to the next level.
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Feature Categories */}
-      {featureCategories.map((category) => (
-        <TerminalSection
-          key={category.id}
-          command={category.command}
-          isExpanded={expandedSections.has(category.id)}
-          onToggle={() => toggleSection(category.id)}
-        >
-          <div className="mb-4">
-            <div className="text-lg font-bold text-pink-900 mb-3">{category.title}</div>
+      {/* App Interface Showcase */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              See the Interface in Action
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Experience the intuitive design and powerful functionality that makes P.R.O. the ultimate fitness companion
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {category.features.map((feature, index) => (
-              <FeatureCard key={feature.title} feature={feature} index={index} />
-            ))}
+          
+          <div className="flex justify-center">
+            <div className="relative group">
+              <img 
+                src="./Frame 1-3.png" 
+                alt="P.R.O. App Interface - Multiple Screens Showing Dashboard, Workouts, Analytics, and Records" 
+                className="w-full max-w-6xl rounded-2xl shadow-large group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
           </div>
-        </TerminalSection>
-      ))}
+          
+          {/* Interface Highlights */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Daily Dashboard</h3>
+              <p className="text-sm text-gray-600">Real-time activity tracking and progress monitoring</p>
+            </div>
+            
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Monthly Analytics</h3>
+              <p className="text-sm text-gray-600">Comprehensive performance summaries and insights</p>
+            </div>
+            
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Workout History</h3>
+              <p className="text-sm text-gray-600">Detailed tracking and analysis of all activities</p>
+            </div>
+            
+            <div className="text-center p-4">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Personal Records</h3>
+              <p className="text-sm text-gray-600">Track achievements and celebrate milestones</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Footer Summary */}
-      <div className="bg-pink-200 rounded-lg shadow-lg p-4 mt-6 border border-pink-400">
-        <div className="text-pink-900 font-bold text-lg mb-2">
-          <span className="mr-2 text-pink-600">$</span>
-          <span className="font-mono">echo "Ready to transform your fitness journey?"</span>
-        </div>
-        <div className="pl-6 text-pink-950 font-mono">
-          <div className="text-sm">
-            🚀 Join thousands of users who have already transformed their fitness with P.R.O.
+      {/* Frame Style Features Section */}
+      <FrameStyleFeatures />
+
+      {/* Detailed Features Grid */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Complete Feature Breakdown
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Dive deeper into each feature category with detailed explanations and use cases
+            </p>
           </div>
-          <div className="text-xs text-pink-700 mt-2">
-            Type 'beta' to sign up for early access
+          
+          {featureCategories.map((category, categoryIndex) => (
+            <div key={category.id} className="mb-24">
+              {/* Category Header */}
+              <div className="text-center mb-16">
+                <div className="relative mb-8">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                    {category.title}
+                  </h2>
+                  <div className="w-32 h-1 bg-gradient-to-r from-pink-500 to-pink-600 mx-auto rounded-full mb-6"></div>
+                </div>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                  {category.description}
+                </p>
+              </div>
+
+              {/* Features Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {category.features.map((feature, index) => (
+                  <FeatureCard 
+                    key={feature.title} 
+                    feature={feature} 
+                    index={categoryIndex * 100 + index} 
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-pink-600 to-pink-700">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+            Ready to Experience All These Features?
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Join thousands of athletes who have already transformed their fitness journey with P.R.O.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/beta"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-pink-700 font-semibold rounded-full hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-medium"
+            >
+              <span className="mr-2">🚀</span>
+              Join Beta
+            </Link>
+            <button
+              onClick={() => window.open('https://apps.apple.com/app/your-app-id', '_blank')}
+              className="inline-flex items-center justify-center px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/30 transform hover:scale-105 transition-all duration-300 border border-white/30 hover:border-white/50"
+            >
+              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              Download for iOS
+            </button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 } 
